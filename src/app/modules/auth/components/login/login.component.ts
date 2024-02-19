@@ -21,4 +21,16 @@ export class LoginComponent {
   get password() {
     return this.loginForm.get('password');
   }
+
+  getEmailErrorMessage() {
+    if (this.email?.hasError('required')) {
+      return 'Email is required';
+    }
+
+    return this.email?.hasError('email') ? 'Not a valid email' : '';
+  }
+
+  getPasswordErrorMessage() {
+    return this.password?.hasError('required') ? 'Password is required' : '';
+  }
 }
