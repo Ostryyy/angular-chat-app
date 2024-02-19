@@ -89,11 +89,11 @@ export class RegisterComponent implements OnDestroy {
             this.toast.observe({
               success: 'Register successfully',
               loading: 'Registering...',
-              error: 'There was an error',
+              error: ({ message }) => `${message}`,
             })
           )
           .subscribe(() => {
-            this.router.navigate(['/auth/login']);
+            this.router.navigate(['/']);
           })
       );
   }

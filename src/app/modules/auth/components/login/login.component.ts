@@ -61,7 +61,7 @@ export class LoginComponent implements OnDestroy {
             this.toast.observe({
               success: 'Logged in successfully',
               loading: 'Logging in...',
-              error: 'There was an error',
+              error: ({ message }) => `${message}`,
             })
           )
           .subscribe(() => {
