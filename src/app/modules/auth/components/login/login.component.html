@@ -1,1 +1,35 @@
-<p>login works!</p>
+<div class="form-container mat-elevation-z5">
+  <h1>Login</h1>
+  <form [formGroup]="loginForm">
+    <mat-form-field>
+      <mat-label>Enter your email address</mat-label>
+      <input matInput placeholder="Email address" formControlName="email" />
+      @if(email?.errors?.['required']){
+      <mat-error>Email is required</mat-error>
+      } @else if(email?.errors?.['email']){
+      <mat-error>Please enter a correct email format</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="center margin-top">
+      <button mat-raised-button color="primary" type="submit">Login</button>
+    </div>
+
+    <span class="center margin-top"
+      >New to our platform?
+      <a class="register-link" routerLink="/auth/register"> Register!</a></span
+    >
+  </form>
+</div>
