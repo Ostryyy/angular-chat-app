@@ -21,6 +21,7 @@
       <button
         mat-icon-button
         matSuffix
+        type="button"
         (click)="hide = !hide"
         [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide"
@@ -34,7 +35,7 @@
 
     <span class="center margin-top"
       >New to our platform?
-      <a class="register-link" routerLink="/auth/register"> Register!</a></span
+      <a class="auth-link" routerLink="/auth/register"> Register!</a></span
     >
   </form>
 </div>

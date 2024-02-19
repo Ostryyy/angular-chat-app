@@ -4,6 +4,7 @@
 html,
 body {
     height: 100%;
+    width: 100%;
 }
 
 body {
@@ -11,9 +12,6 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.content {
-    padding: 16px;
-}
 
 .form-container {
     display: block;
@@ -40,4 +38,10 @@ body {
 
 .text-center {
     text-align: center;
+}
+
+.auth-link {
+    font-size: 1.2rem;
+    margin-left: 8px;
+
 }

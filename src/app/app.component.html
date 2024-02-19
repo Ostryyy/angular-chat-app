@@ -1,14 +1,12 @@
+@if(authService.currentUser$ | async; as user) {
 <mat-toolbar color="primary"
-  >Chat-app @if(authService.currentUser$ | async; as user) {
+  >Chat-app
   <button mat-button (click)="onLogout()">
     <mat-icon>logout</mat-icon> Logout
   </button>
-  }@else{
-  <button mat-button routerLink="/auth/login">
-    <mat-icon>login</mat-icon> Login
-  </button>
-  }
 </mat-toolbar>
+}
+
 <div class="content">
   <router-outlet></router-outlet>
 </div>
