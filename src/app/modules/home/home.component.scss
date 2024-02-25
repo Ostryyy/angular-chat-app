@@ -9,10 +9,22 @@
         border-radius: 16px;
 
         .search-input {
-            margin: 24px;
+            margin: 24px 24px 0 24px;
 
             mat-form-field {
                 width: 100%;
+            }
+        }
+
+        .chat-title {
+
+            .chat-name {
+                font-weight: 500;
+            }
+
+            .chat-date {
+                font-size: 0.7rem;
+                color: rgba(0, 0, 0, 0.7);
             }
         }
     }

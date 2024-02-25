@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -22,6 +23,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatInputModule,
     MatMenuModule,
     MatAutocompleteModule,
+    MatListModule,
     ReactiveFormsModule,
   ],
 })

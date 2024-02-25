@@ -10,12 +10,44 @@
       /></mat-form-field>
       <mat-autocomplete #users="matAutocomplete">
         @for (user of users$ | async; track $index) {
-        <mat-option>
+        <mat-option (click)="createChat(user)">
           {{ user?.displayName }}
         </mat-option>
         }
       </mat-autocomplete>
     </div>
+
+    <mat-selection-list
+      [multiple]="false"
+      [hideSingleSelectionIndicator]="true"
+      [formControl]="chatListControl"
+    >
+      <mat-divider />
+      @for (chat of myChats$ |async; track $index) {
+      <mat-list-option [value]="chat.id">
+        <img
+          matListItemAvatar
+          [src]="
+            chat.chatPic
+              ? chat.chatPic
+              : '../../assets/images/image-placeholder.png'
+          "
+        />
+        <span matListItemTitle class="chat-title">
+          <span class="chat-name">
+            {{ chat.chatName }}
+          </span>
+          <span class="chat-date">
+            {{ chat.lastMessageDate }}
+          </span>
+        </span>
+        <span matListItemLine>
+          {{ chat.lastMessage }}
+        </span>
+        <mat-divider />
+      </mat-list-option>
+      }
+    </mat-selection-list>
   </div>
   <div class="messages mat-elevation-z5"></div>
 </div>
