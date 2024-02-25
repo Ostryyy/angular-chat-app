@@ -4,6 +4,7 @@ import {
   combineLatest,
   distinctUntilChanged,
   map,
+  of,
   startWith,
   switchMap,
   tap,
@@ -62,7 +63,17 @@ export class HomeComponent {
   ) {}
 
   createChat(user: ProfileUser) {
-    this.chatsService.createChat(user).subscribe();
+    this.chatsService
+      .isExistingChat(user?.uid)
+      .pipe(
+        switchMap((chatId) => {
+          if (chatId) return of(chatId);
+          else return this.chatsService.createChat(user);
+        })
+      )
+      .subscribe((chatId) => {
+        this.chatListControl.setValue([chatId]);
+      });
   }
 
   sendMessage() {
