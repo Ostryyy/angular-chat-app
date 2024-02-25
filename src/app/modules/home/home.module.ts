@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
@@ -11,9 +11,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatListModule } from '@angular/material/list';
+import { DateDisplayPipe } from 'src/app/pipes/date-display.pipe';
 
 @NgModule({
   declarations: [HomeComponent],
+  providers: [DatePipe],
   imports: [
     CommonModule,
     HomeRoutingModule,
@@ -25,6 +27,7 @@ import { MatListModule } from '@angular/material/list';
     MatAutocompleteModule,
     MatListModule,
     ReactiveFormsModule,
+    DateDisplayPipe,
   ],
 })
 export class HomeModule {}

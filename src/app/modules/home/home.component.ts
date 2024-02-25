@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { combineLatest, map, startWith } from 'rxjs';
+import {
+  combineLatest,
+  distinctUntilChanged,
+  map,
+  startWith,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { ProfileUser } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatsService } from 'src/app/services/chats.service';
@@ -12,9 +19,12 @@ import { UserService } from 'src/app/services/user.service';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
+  @ViewChild('endOfChat') endOfChat!: ElementRef;
+
   user$ = this.authService.currentUser$;
   searchControl: FormControl = new FormControl('');
   chatListControl: FormControl = new FormControl();
+  messageControl: FormControl = new FormControl('');
 
   myChats$ = this.chatsService.myChats$;
 
@@ -38,6 +48,13 @@ export class HomeComponent {
     this.myChats$,
   ]).pipe(map(([value, chats]) => chats.find((c) => c.id === value[0])));
 
+  messages$ = this.chatListControl.valueChanges.pipe(
+    map((value) => value[0]),
+    distinctUntilChanged(),
+    switchMap((chatId) => this.chatsService.getChatMessages$(chatId)),
+    tap(() => this.scrollToBottom())
+  );
+
   constructor(
     private authService: AuthService,
     private userService: UserService,
@@ -46,5 +63,23 @@ export class HomeComponent {
 
   createChat(user: ProfileUser) {
     this.chatsService.createChat(user).subscribe();
+  }
+
+  sendMessage() {
+    const message = this.messageControl.value;
+    const selectedChatId = this.chatListControl.value[0];
+
+    if (message && selectedChatId) {
+      this.chatsService.addChatMessage(selectedChatId, message).subscribe();
+      this.scrollToBottom();
+      this.messageControl.setValue('');
+    }
+  }
+
+  scrollToBottom() {
+    setTimeout(() => {
+      if (this.endOfChat)
+        this.endOfChat.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   }
 }

@@ -5,6 +5,7 @@ import {
   redirectUnauthorizedTo,
   redirectLoggedInTo,
 } from '@angular/fire/auth-guard';
+import { DateDisplayPipe } from './pipes/date-display.pipe';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['/auth/login']);
 const redirectToHome = () => redirectLoggedInTo(['/home']);

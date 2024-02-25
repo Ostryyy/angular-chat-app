@@ -17,6 +17,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
+import { DateDisplayPipe } from './pipes/date-display.pipe';
 
 @NgModule({
   declarations: [AppComponent],
