@@ -31,7 +31,7 @@ export class ProfileComponent {
           error: 'There was an error in uploading',
         }),
         concatMap((photoUrl) =>
-          this.userService.updateUser({ uid: user.uid, photoURL: photoUrl })
+          this.userService.updateUser({ uid: user.uid, photoUrl: photoUrl })
         )
       )
       .subscribe();

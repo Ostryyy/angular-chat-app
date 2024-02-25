@@ -33,11 +33,11 @@ export class ChatsService {
           users: [
             {
               displayName: user?.displayName ?? '',
-              photoUrl: user?.photoURL ?? '',
+              photoUrl: user?.photoUrl ?? '',
             },
             {
               displayName: otherUser?.displayName ?? '',
-              photoUrl: otherUser?.photoURL ?? '',
+              photoUrl: otherUser?.photoUrl ?? '',
             },
           ],
         })
@@ -106,9 +106,10 @@ export class ChatsService {
     chats.forEach((chat) => {
       const otherIndex = chat.userIds.indexOf(currentUserId) === 0 ? 1 : 0;
 
-      const { displayName, photoURL } = chat.users[otherIndex];
+      const { displayName, photoUrl } = chat.users[otherIndex];
+
       chat.chatName = displayName;
-      chat.chatPic = photoURL;
+      chat.chatPic = photoUrl;
     });
 
     return chats;
