@@ -1,3 +1,21 @@
-@if(user$ | async; as user){
-<h1>Welcome to our app, {{ user.email }}!</h1>
-}
+<div class="container">
+  <div class="chat-list mat-elevation-z5">
+    <div class="search-input">
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          placeholder="Search for users..."
+          [formControl]="searchControl"
+          [matAutocomplete]="users"
+      /></mat-form-field>
+      <mat-autocomplete #users="matAutocomplete">
+        @for (user of users$ | async; track $index) {
+        <mat-option>
+          {{ user?.displayName }}
+        </mat-option>
+        }
+      </mat-autocomplete>
+    </div>
+  </div>
+  <div class="messages mat-elevation-z5"></div>
+</div>

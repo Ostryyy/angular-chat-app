@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,13 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'chat-app';
 
-  constructor(public authService: AuthService, private router: Router) {}
+  user$ = this.userService.currentUserProfile$;
+
+  constructor(
+    public authService: AuthService,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   onLogout() {
     this.authService.logout().subscribe(() => {

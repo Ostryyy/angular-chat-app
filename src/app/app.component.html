@@ -1,4 +1,4 @@
-@if(authService.currentUser$ | async; as user) {
+@if(user$ | async; as user) {
 <mat-toolbar color="primary"
   >Chat-app
   <button mat-button [matMenuTriggerFor]="userMenu">

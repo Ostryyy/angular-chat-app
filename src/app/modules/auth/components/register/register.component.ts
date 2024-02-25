@@ -9,8 +9,9 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
-import { Subscription } from 'rxjs';
+import { Subscription, switchMap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 export function passwordsMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -50,6 +51,7 @@ export class RegisterComponent implements OnDestroy {
 
   constructor(
     private authService: AuthService,
+    private userService: UserService,
     private router: Router,
     private toast: HotToastService
   ) {}
@@ -84,16 +86,23 @@ export class RegisterComponent implements OnDestroy {
     if (name && surname && email && password)
       this.registerSub.add(
         this.authService
-          .signUp(name, surname, email, password)
+          .signUp(email, password)
           .pipe(
+            switchMap(({ user: { uid } }) =>
+              this.userService.addUser({
+                uid,
+                email,
+                displayName: `${name} ${surname}`,
+              })
+            ),
             this.toast.observe({
-              success: 'Register successfully',
-              loading: 'Registering...',
+              success: 'Congrats! You are all signed up',
+              loading: 'Signing up...',
               error: ({ message }) => `${message}`,
             })
           )
-          .subscribe(() => {
-            this.router.navigate(['/']);
+          .subscribe((response) => {
+            this.router.navigate(['/home']);
           })
       );
   }

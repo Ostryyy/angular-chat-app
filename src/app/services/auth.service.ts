@@ -20,19 +20,8 @@ export class AuthService {
     return from(signInWithEmailAndPassword(this.auth, email, password));
   }
 
-  signUp(
-    name: string,
-    surname: string,
-    email: string,
-    password: string
-  ): Observable<any> {
-    return from(
-      createUserWithEmailAndPassword(this.auth, email, password)
-    ).pipe(
-      switchMap(({ user }) =>
-        updateProfile(user, { displayName: `${name} ${surname}` })
-      )
-    );
+  signUp(email: string, password: string): Observable<any> {
+    return from(createUserWithEmailAndPassword(this.auth, email, password));
   }
 
   logout() {
