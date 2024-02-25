@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-chat-app-f4090": {
+      "hosting": {
+        "chat-app": [
+          "angular-chat-app-f4090"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-chat-app-f4090"
+  }
+}

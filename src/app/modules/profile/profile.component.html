@@ -1,0 +1,21 @@
+@if (user$| async; as user) {
+<div class="form-container mat-elevation-z5 text-center">
+  <h1>User Profile</h1>
+
+  <div class="profile-image">
+    <img
+      width="120"
+      height="120"
+      [src]="
+        user.photoURL
+          ? user.photoURL
+          : '../../assets/images/image-placeholder.png'
+      "
+    />
+    <button mat-mini-fab (click)="fileField.click()">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+  <input hidden type="file" #fileField (change)="uploadImage($event, user)" />
+</div>
+}

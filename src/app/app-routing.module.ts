@@ -28,6 +28,12 @@ const routes: Routes = [
       import('./modules/home/home.module').then((m) => m.HomeModule),
     ...canActivate(redirectToLogin),
   },
+  {
+    path: 'profile',
+    loadChildren: () =>
+      import('./modules/profile/profile.module').then((m) => m.ProfileModule),
+    ...canActivate(redirectToLogin),
+  },
 ];
 
 @NgModule({

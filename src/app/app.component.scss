@@ -1,12 +1,28 @@
 mat-toolbar {
     justify-content: space-between;
 
+    a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
     button {
-        div {
+        .container {
             display: flex;
             align-items: center;
-            height: 100%;
+
+            .profile-image-toolbar {
+                border-radius: 100%;
+                margin-right: 8px;
+            }
+
+            .user-expand {
+                display: flex;
+                align-items: center;
+                height: 100%;
+            }
         }
+
     }
 }
 

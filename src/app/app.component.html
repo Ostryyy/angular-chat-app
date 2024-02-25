@@ -1,9 +1,18 @@
 @if(user$ | async; as user) {
 <mat-toolbar color="primary"
-  >Chat-app
+  ><a routerLink="/home">Chat-app</a>
   <button mat-button [matMenuTriggerFor]="userMenu">
-    <mat-icon>account_circle</mat-icon>
-    <div>{{ user.displayName }} <mat-icon>expand_more</mat-icon></div>
+    <div class="container">
+      <img
+        width="30"
+        height="30"
+        class="profile-image-toolbar"
+        [src]="user.photoURL ?? 'assets/images/image-placeholder.png'"
+      />
+      <div class="user-expand">
+        {{ user.displayName }} <mat-icon>expand_more</mat-icon>
+      </div>
+    </div>
   </button>
 </mat-toolbar>
 }
@@ -13,6 +22,9 @@
 </div>
 
 <mat-menu #userMenu="matMenu">
+  <button mat-menu-item routerLink="/profile">
+    <mat-icon>account_circle</mat-icon> Profile
+  </button>
   <button mat-menu-item (click)="onLogout()">
     <mat-icon>logout</mat-icon> Logout
   </button>
