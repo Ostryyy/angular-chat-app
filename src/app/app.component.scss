@@ -1,0 +1,15 @@
+mat-toolbar {
+    justify-content: space-between;
+
+    button {
+        div {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+    }
+}
+
+.content {
+    padding: 16px;
+}
